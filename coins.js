@@ -14,14 +14,14 @@ export let defaultCoins = [
        symbol: "BNB",
        idGecko: "binancecoin",
        network: "BEP20",
-       logo: "photo/bnb.png",
-       coin_logo: "photo/bnb.png",
+       logo: "bnb.png",
+       coin_logo: "bnb.png",
        rpc: null,
        contract: null
      },
      {
        id: 2,
-       logo: "photo/usdt.png",
+       logo: "usdt.png",
        balance: 0,
        price: 0,
        change: 0,
@@ -30,7 +30,7 @@ export let defaultCoins = [
        idGecko: "tether",
        network: "BEP20",
        chainId: 56,
-       coin_logo: "photo/bnb.png",
+       coin_logo: "bnb.png",
        rpc: "https://bsc-datasees.binance.org",
        contract: "0x55d398326f99059fF775485246999027B3197955"
      },
@@ -44,8 +44,8 @@ export let defaultCoins = [
        idGecko: "tether",
        network: "Base",
        chainId: 8453,
-       logo: "photo/usdt.png",
-       coin_logo: "photo/base.png",
+       logo: "usdt.png",
+       coin_logo: "base.png",
        rpc: "https://mainnet.base.org",
        contract: null
      },
@@ -59,8 +59,8 @@ export let defaultCoins = [
        idGecko: "tether",
        network: "Polygon",
        chainId: 137,
-       logo: "photo/usdt.png",
-       coin_logo: "photo/poly.png",
+       logo: "usdt.png",
+       coin_logo: "poly.png",
        rpc: "https://polygon-rpc.com",
        contract: null
      }
