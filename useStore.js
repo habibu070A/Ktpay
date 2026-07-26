@@ -59,7 +59,7 @@ updatePrice: (data) => {
   usdt += k.balance * p?.usd;
   ngn += k.balance * p?.ngn;
 
-  return {...k, price_ngn: p_ngn, value_ngn: val_ngn}
+  return {...k, price_ngn: price: p?.usd, p_ngn, value_ngn: val_ngn}
   });
   set({coins: newCoin, total: usdt,  ngn: ngn});
 },
