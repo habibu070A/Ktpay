@@ -48,6 +48,6 @@ ws.onmessage = (e) => {
   let data = JSON.parse(e.data);
   Object.values(data).map(d => {
    getLive(d);
-   alert(JSON.stringify(d));
+   alert("hi");
   })
 };
