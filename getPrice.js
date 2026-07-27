@@ -36,7 +36,7 @@ let ping = null;
 
 
 function onConnect() {
-const ws = new WebSocket("wss://stream.bybit.com/v5/public/spot");
+ws = new WebSocket("wss://stream.bybit.com/v5/public/spot");
 
 ws.onopen = () => {
   ws.send(JSON.stringify({
@@ -61,16 +61,21 @@ ping = setInterval(() => {
 
 
 
-ws.onmessage = (e) => {
+ws.onmessage = function(e){
   let data = JSON.parse(e.data);
   Object.values(data).map(d => {
    getLive(d);
   })
 };
 
-
 ws.onerror = function(err) {
-  alert("error", err);
+  showAlert("error", err);
+  clearInterval(ping);
+}
+
+
+ws.onclose = function(err) {
+  showAlert("poor network connection🛜" + err);
   
   clearInterval(ping);
   
@@ -81,12 +86,6 @@ ws.onerror = function(err) {
   setTimeout(() => {
     onConnect();
   }, timing);
-}
-
-
-ws.onclose = function() {
-  alert("disconnect");
-  ws.close();
 }
 
 }
