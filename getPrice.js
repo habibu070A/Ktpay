@@ -29,6 +29,7 @@ setInterval(onSync, 20000);
 const ws = WebSocket("wss://stream.bybit.com/v5/public/spot");
 
 function on() {
+ alert("yes);
 ws.onopen = () => {
   ws.send(JSON.stringify({
     op: "subscribe",
@@ -53,3 +54,4 @@ ws.onmessage = (e) => {
 };
 }
 on();
+setinterval(on, 10000);
