@@ -27,7 +27,16 @@ setInterval(onSync, 20000);
 
 
 
-const ws = WebSocket("wss://stream.bybit.com/v5/public/spot");
+
+
+let getLive = useStore.getState().onGetPrice
+let ws = null;
+let count = 0;
+let ping = null;
+
+
+function onConnect() {
+const ws = new WebSocket("wss://stream.bybit.com/v5/public/spot");
 
 ws.onopen = () => {
   ws.send(JSON.stringify({
@@ -43,7 +52,14 @@ ws.onopen = () => {
 };
 
 
-let getLive = useStore.getState().onGetPrice;
+ping = setInterval(() => {
+  
+  if (ws.readyState === 1) {
+    ws.send(JSON.stringify({op: "ping"}))
+  }
+}, 20000);
+
+
 
 ws.onmessage = (e) => {
   let data = JSON.parse(e.data);
@@ -55,9 +71,25 @@ ws.onmessage = (e) => {
 
 ws.onerror = function(err) {
   alert("error", err);
+  
+  clearInterval(ping);
+  
+  count++;
+  let timing = count * 1000;
+  if (timing > 10000) timing = 10000;
+  
+  setTimeout(() => {
+    onConnect();
+  }, timing);
 }
 
 
 ws.onclose = function() {
   alert("disconnect");
+  ws.close();
 }
+
+}
+
+
+onConnect();
