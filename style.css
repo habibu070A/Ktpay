@@ -116,7 +116,7 @@ footer nav a i{
   border-radius: 20px;
   display: flex;
   align-items: center;
-  padding: 10px;
+  padding: 0 10px;
 }
 .home-page header div{
   display: flex;
@@ -231,7 +231,7 @@ footer nav a i{
 }
 
 .coin-row article div span{
-  font-size: 15px;
+  font-size: 13px;
   font-weight: bold;
 }
 .coin-row article div p{
