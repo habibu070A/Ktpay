@@ -3,6 +3,7 @@ import { defaultCoins } from "./coins.js";
 import { useStore } from "./useStore.js";
 
 
+
 let id = defaultCoins.map(k => k.idGecko).join(",");
 const url = `https://api.coingecko.com/api/v3/simple/price?ids=${id}&vs_currencies=usd,ngn&include_24hr_change=true`;
 
@@ -28,8 +29,6 @@ setInterval(onSync, 20000);
 
 const ws = WebSocket("wss://stream.bybit.com/v5/public/spot");
 
-function on() {
- alert("yes);
 ws.onopen = () => {
   ws.send(JSON.stringify({
     op: "subscribe",
@@ -52,6 +51,3 @@ ws.onmessage = (e) => {
    getLive(d);
   })
 };
-}
-on();
-setinterval(on, 10000);

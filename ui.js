@@ -1,4 +1,5 @@
 import { useStore } from "./useStore.js";
+import { onFormat } from "./formatBalance.js";
 
 
 const deposit = useStore.getState();
@@ -8,6 +9,12 @@ const bal = document.getElementById("balance");
 document.getElementById("deposit").addEventListener("click", () => {
   showAlert("Deposit coming soon stay tuned for update")
 });
+
+
+
+
+
+
 
 function onUnshift() {
   let obj = useStore.getState().coins;
@@ -36,35 +43,27 @@ setTimeout(() => {
 
 
 
-function onSort() {
+
+function render(c) {
   let coin = useStore.getState().getCoin();
-  
   const sort = coin.sort((a, b) => b.change - a.change);
-  useStore.getState().sortPrice([...sort]);
-}
-
-onSort();
-setInterval(onSort, 100);
-
-
-
-
-
-
-
-
-
-function renderApp(state) {
   
-  bal.innerHTML = (state?.total || 0)?.toLocaleString("en-Us", {
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2
-  });
-  if (state?.total <= 0) {
-    setTimeout(() => {renderApp()}, 100);
-    console.log(state.total);
-  }
-}
+  useStore.getState().sortPrice([...sort]);
+};
 
-renderApp(useStore.getState());
-useStore.subscribe(renderApp);
+render();
+setInterval(render, 100);
+
+
+
+
+
+
+useStore.subscribe((e) => {
+  let coin = e.coins;
+  let t = 0;
+  coin.map(e => {
+  t += e.balance * e.price;
+  })
+  bal.innerHTML = onFormat(t);
+});

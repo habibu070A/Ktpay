@@ -1,36 +1,37 @@
 import { useStore } from "./useStore.js";
+import { onFormat } from "././formatBalance.js";
+
+
+
 
 function useThis() {
-let d = useStore.getState().getCoin();
+let coinsList = useStore.getState().getCoin();
 let list = document.getElementById("coins");
 let asst = document.getElementById("coin-asset");
 let html = "";
 let asset = "";
 
 
-d.map(k => {
+coinsList.map(k => {
+  
     let col = k.change < 0 ? "red" : "#00c087";
-    const balance = k.balance?.toLocaleString("en-UD", {
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2
-    });
+    
+    
     
     
     const price = k.price?.toLocaleString("en-US", {
-      minimumFractionDigits: 4,
+      minimumFractionDigits: 2,
       maximumFractionDigits: 4
     });
     
-    const val = k.value_ngn?.toLocaleString("en-NG", {
+    
+    const p_ngn = k.price_ngn?.toLocaleString("en-US", {
       minimumFractionDigits: 2,
       maximumFractionDigits: 2
     });
     
-    const p_ngn = k.price_ngn?.toLocaleString("en-NG", {
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2
-    })
     
+
     
     asset += `
     <article onclick="onTrade('')" class="row-asset">
@@ -49,13 +50,12 @@ d.map(k => {
     </div>
     
     <div class="right-up">
-    <span style="font-size: 10px">${k.symbol}</span>
-    <span>${balance}</span>
+    <span>${onFormat(k.balance)}</span>
     </div>
     
     <span class="left-dow">&#8358; ${p_ngn}</span>
     
-    <span class="right-dow">&#8358; ${val}</span>
+    <span class="right-dow">&#8358; ${onFormat(k.value_ngn)}</span>
   
     </article>
     `;
@@ -73,7 +73,7 @@ d.map(k => {
     </div>
     </article>
     
-    <span class="bal-item" style="font-size: 10px">${k.symbol} <span class="bal-item">${balance}</span></span>
+    <span class="bal-item">${onFormat(k.balance)}</span>
     
     <span class="chan-item" style="color:${col}; border-radius: 10px; box-shadow: 0px 0px 1px #000;">${k.change.toFixed(4)} %</span>
     
@@ -87,8 +87,6 @@ asst.innerHTML = asset;
 }
 
 
-useThis();
 
-useStore.subscribe(() => {
-  useThis();
-})
+useThis(useStore.getState);
+useStore.subscribe(useThis);

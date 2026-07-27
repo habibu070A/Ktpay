@@ -9,7 +9,7 @@ export const useStore = createStore((set, get) => ({
   liveData: [],
   
   
-  uplaodCoin: (data) => {
+  uploadCoin: (data) => {
   if (typeof data === "object") {
     let coins = get().coins;
     set({coins: data})
@@ -26,6 +26,15 @@ export const useStore = createStore((set, get) => ({
   
   getCoin: () => {
     return get().coins;
+  },
+  
+  
+  getNGN: () => {
+    return get().ngn;
+  },
+  
+  getUSD: () => {
+    return get().total;
   },
   
   
@@ -52,7 +61,7 @@ updatePrice: (data) => {
   let newCoin = coins.map(k => {
   let p = data[k.idGecko];
   
-  if (!p?.usd > 0) return k;
+  if (!p?.usd < 0) return e;
   let val_ngn = k.balance * p?.ngn
   let p_ngn = p?.ngn;
   let c = p.usd_24h_change;
@@ -71,6 +80,10 @@ updatePrice: (data) => {
 
 
 
+
+
+
+
 onGetPrice: (data) => {
   let coins = get().coins;
   
@@ -78,18 +91,25 @@ onGetPrice: (data) => {
   
   
   if (e.syl === data.symbol) {
+    
   
   return {
     ...e,
     price: Number(data.lastPrice),
     change: Number(data.price24hPcnt) * 1
+    }
   }
-  } else {
-    return e;
-  }
+  return e;
   });
   set({coins: newCoins});
 },
+
+
+
+
+
+
+
 
 
 
