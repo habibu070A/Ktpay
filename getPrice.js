@@ -51,3 +51,13 @@ ws.onmessage = (e) => {
    getLive(d);
   })
 };
+
+
+ws.onerror = function(err) {
+  alert("error", err);
+}
+
+
+ws.onclose = function() {
+  alert("disconnect");
+}
