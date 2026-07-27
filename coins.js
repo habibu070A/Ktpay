@@ -78,7 +78,7 @@ export let defaultCoins = [
      },
      {
        id: 5,
-       balance: 0.05,
+       balance: 0.0005,
        change: 0,
        price: 0,
        price_ngn: 0,
