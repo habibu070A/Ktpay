@@ -75,7 +75,7 @@ ws.onerror = function(err) {
 
 
 ws.onclose = function(err) {
-  showAlert("poor network connection🛜" + err);
+  showAlert("poor network connection🛜" + JSON.stringify(err));
   
   clearInterval(ping);
   
