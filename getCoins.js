@@ -25,7 +25,7 @@ coinsList.map(k => {
     });
     
     
-    const p_ngn = k.price_ngn?.toLocaleString("en-US", {
+    const p_ngn = (k.price_ngn || 0)?.toLocaleString("en-US", {
       minimumFractionDigits: 2,
       maximumFractionDigits: 2
     });
