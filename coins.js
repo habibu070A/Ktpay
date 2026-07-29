@@ -6,7 +6,7 @@ import { useStore } from "./useStore.js"
 export let defaultCoins = [
      {
        id: 1,
-       balance: 0.05,
+       balance: 0.5,
        value_ngn: 0,
        price: 0,
        price_ngn: 0,
@@ -78,7 +78,7 @@ export let defaultCoins = [
      },
      {
        id: 5,
-       balance: 0.0005,
+       balance: 0.05,
        change: 0,
        price: 0,
        price_ngn: 0,
